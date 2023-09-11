@@ -21,12 +21,22 @@ jobs:
           python -m venv todo-app-venv
           source todo-app-venv/bin/activate
           pip install -r requirements.txt
+      - name: Cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: todo-app-venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
 
   test:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+      - name: Restore virtual environment from cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: todo-app-venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
       - name: Run tests
         run: |
           source todo-app-venv/bin/activate
