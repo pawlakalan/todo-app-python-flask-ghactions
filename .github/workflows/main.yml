@@ -10,7 +10,7 @@ jobs:
       - name: Set up Python and install dependencies
         uses: actions/setup-python@v4.7.0
         with:
-          python-version: 3.x
+          python-version: 3.8.10
       - run: |
           python -m venv todo-app-venv
           source todo-app-venv/bin/activate
