@@ -43,7 +43,7 @@ jobs:
           python -m unittest test_app
 
   upload-artifact:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -64,7 +64,7 @@ jobs:
           docker push pawlakalan/todo-app-python-flask:latest
 
   deploy:
-    needs: [build, upload-artifact]
+    needs: [build, test, upload-artifact]
     runs-on: ubuntu-latest
 
     steps:
