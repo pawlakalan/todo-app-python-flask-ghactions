@@ -3,7 +3,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.0.0
@@ -23,7 +23,7 @@ jobs:
 
   test:
     needs: build
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - name: Restore cache
         uses: actions/cache@v3.3.2
@@ -37,7 +37,7 @@ jobs:
 
   upload-artifact:
     needs: test
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - name: Restore cache
         uses: actions/cache@v3.3.2
@@ -58,7 +58,7 @@ jobs:
   deploy:
     needs: [build, test, upload-artifact]
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - name: Restore cache
         uses: actions/cache@v3.3.2
